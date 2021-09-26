@@ -16,6 +16,7 @@ According to wikipedia, boilerplate code is "the sections of code that have to b
 
 Abbreviations used: 
 
+    cs = cubic surfaces
     ff = finite fields
     grp = group theory
 
