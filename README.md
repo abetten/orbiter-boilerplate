@@ -16,8 +16,8 @@ According to wikipedia, boilerplate code is "the sections of code that have to b
 
 Abbreviations used: 
 
-ff = finite fields
-grp = group theory
+    ff = finite fields
+    grp = group theory
 
 
 The contents of this directory are
