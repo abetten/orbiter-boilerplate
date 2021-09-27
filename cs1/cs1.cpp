@@ -217,29 +217,12 @@ int main()
 
 
 
-#if 0
-	surface_domain_high_level SH;
-
-
-	SH.do_sweep_4(
-			PA,
-			surface_description,
-			sweep_4_fname,
-			verbose_level);
-#else
-
 	surface_with_action *Surf_A;
 
 	PA->setup_surface_with_action(
 			Surf_A,
 			verbose_level);
 
-#if 0
-	Surf_A->sweep_4(
-			surface_description,
-			fname,
-			verbose_level);
-#else
 
 	surface_create_description *Surface_Descr;
 
@@ -254,7 +237,7 @@ int main()
 	int m;
 
 	if (f_v) {
-		cout << "surface_with_action::sweep_4_27" << endl;
+		cout << "cs1 sweep_4_27" << endl;
 	}
 
 
@@ -373,11 +356,11 @@ int main()
 					SC = NEW_OBJECT(surface_create);
 
 					if (f_v) {
-						cout << "surface_with_action::sweep_4_27 before SC->init" << endl;
+						cout << "cs1 before SC->init" << endl;
 					}
 					SC->init(Surface_Descr, Surf_A, verbose_level);
 					if (f_v) {
-						cout << "surface_with_action::sweep_4_27 after SC->init" << endl;
+						cout << "cs1 after SC->init" << endl;
 					}
 
 
@@ -483,12 +466,10 @@ int main()
 	FREE_lint(T);
 
 	if (f_v) {
-		cout << "surface_with_action::sweep_4_27 done" << endl;
+		cout << "cs1 sweep_4_27 done" << endl;
 	}
 
 
-#endif
 
-#endif
 
 }
