@@ -16,6 +16,9 @@ using namespace orbiter;
 
 int main()
 {
+
+	orbiter::layer5_applications::user_interface::orbiter_top_level_session Orbiter;
+
 	field_theory::finite_field F;
 	
 	F.finite_field_init_small_order(16,

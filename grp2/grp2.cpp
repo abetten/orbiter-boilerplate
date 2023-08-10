@@ -16,6 +16,9 @@ using namespace orbiter;
 
 int main()
 {
+
+	orbiter::layer5_applications::user_interface::orbiter_top_level_session Orbiter;
+
 	int verbose_level = 2;
 
 	int degree = 4;

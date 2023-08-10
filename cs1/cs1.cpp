@@ -18,6 +18,10 @@ using namespace orbiter::layer5_applications;
 
 int main()
 {
+
+	orbiter::layer5_applications::user_interface::orbiter_top_level_session Orbiter;
+
+
 	int verbose_level = 2;
 	int q = 7;
 	int n = 3;
@@ -26,19 +30,19 @@ int main()
 	const char *equation_name_of_formula = "F_abcd";
 	const char *equation_name_of_formula_tex = "\\DF_{a,b,c,d}\\D";
 	const char *equation_managed_variables = "X0,X1,X2,X3";
-	const char *equation_text = "-(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*(b - d)*X0*X0*X2 "
-			"+ (a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*(a + b - c - d)*X0*X1*X2 "
-			"+ (a*a*c - a*a*d - a*c*c + b*c*c + a*d - b*c)*(b - d)*X0*X1*X3 "
-			"- (a*d - b*c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X0*X2*X2 "
-			"- (a*a*c*d - a*b*c*c - a*a*d + a*b*d + b*c*c - b*c*d)*(b - d)*X0*X2*X3 "
-			"- (a - c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X1*X1*X2 "
-			"- (a - c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X1*X1*X3 "
-			"+ (a*d - b*c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X1*X2*X2 "
-			"+ ((1+1)*a*a*b*c*d - a*a*b*d*d - (1+1)*a*a*c*d*d "
-				"- (1+1)*a*b*b*c*c + a*b*b*c*d + (1+1)*a*b*c*c*d "
-				"+ a*b*c*d*d - b*b*c*c*d - a*a*b*c + a*a*c*d + a*a*d*d + a*b*b*c + a*b*c*c "
-				"- (1+1+1+1)*a*b*c*d - a*c*c*d + a*c*d*d + b*b*c*c)*X1*X2*X3 "
-			"+ c*a*(a*d - b*c - a + b + c - d)*(b - d)*X1*X3*X3";
+	const char *equation_text = "-(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*(b - d)*X0^2*X2 \
++ (a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*(a + b - c - d)*X0*X1*X2 \
++ (a^2*c - a^2*d - a*c^2 + b*c^2 + a*d - b*c)*(b - d)*X0*X1*X3 \
+- (a*d - b*c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X0*X2^2 \
+- (a^2*c*d - a*b*c^2 - a^2*d + a*b*d + b*c^2 - b*c*d)*(b - d)*X0*X2*X3 \
+- (a - c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X1^2*X2 \
+- (a - c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X1^2*X3 \
++ (a*d - b*c)*(a*b*c - a*b*d - a*c*d + b*c*d + a*d - b*c)*X1*X2^2 \
++ ((1+1)*a^2*b*c*d - a^2*b*d^2 - (1+1)*a^2*c*d^2 \
+- (1+1)*a*b^2*c^2 + a*b^2*c*d + (1+1)*a*b*c^2*d + a*b*c*d^2 \
+- b^2*c^2*d - a^2*b*c + a^2*c*d + a^2*d^2 + a*b^2*c + a*b*c^2 \
+- (1+1+1+1)*a*b*c*d - a*c^2*d + a*c*d^2 + b^2*c^2)*X1*X2*X3 \
++ c*a*(a*d - b*c - a + b + c - d)*(b - d)*X1*X3^2";
 	const char *equation_parameters = "a=2,b=3,c=4,d=5";
 	const char *equation_parameters_tex = "\\Da=2,b=3,c=4,d=5\\D";
 
@@ -109,7 +113,7 @@ int main()
 
 
 
-	surface_description->f_space_pointer;
+	surface_description->f_space_pointer = true;
 	surface_description->space_pointer = PA;
 
 
@@ -241,12 +245,11 @@ int main()
 					}
 
 
-					char str[1000];
-
-					sprintf(str, "a=%d,b=%d,c=%d,d=%d", a, b, c, d);
-
-
-					Surface_Descr->equation_parameters.assign(str);
+					Surface_Descr->equation_parameters =
+							"a=" + std::to_string(a)
+							+ ",b=" + std::to_string(b)
+							+ ",c=" + std::to_string(c)
+							+ ",d=" + std::to_string(d);
 
 
 					// create the cubic surface associated with the parameters a,b,c,d:
