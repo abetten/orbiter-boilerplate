@@ -28,30 +28,32 @@ int main()
 	int degree = 48;
 	int target_go_lint = 144;
 	int nb_rows = 24;
-	longinteger_object target_go;
+	ring_theory::longinteger_object target_go;
 
-	target_go.create(target_go_lint, __FILE__, __LINE__);
-	action *A;
+	target_go.create(target_go_lint);
+	actions::action *A;
 
-	A = NEW_OBJECT(action);
+	A = NEW_OBJECT(actions::action);
 
-	A->init_permutation_group_from_generators(degree,
-			TRUE /*  f_target_go */, target_go,
+	A->Known_groups->init_permutation_group_from_generators(degree,
+			true /*  f_target_go */, target_go,
 			nb_gens, generators,
 			base_len, given_base,
+			false /* f_no_base */,
 			verbose_level);
+
 
 	A->Strong_gens->print_generators_in_latex_individually(cout);
 	A->Strong_gens->print_generators_in_source_code();
 	A->print_base();
 	A->print_info();
 
-	action *A2;
+	actions::action *A2;
 
-	schreier *Sch;
+	groups::schreier *Sch;
 
 
-	A2 = A->induced_action_on_interior_direct_product(nb_rows, verbose_level);
+	A2 = A->Induced_action->induced_action_on_interior_direct_product(nb_rows, verbose_level);
 
 	A2->print_info();
 	A2->compute_orbits_on_points(Sch, A->Strong_gens->gens, verbose_level);

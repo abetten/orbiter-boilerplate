@@ -20,11 +20,11 @@ int main()
 
 	int degree = 4;
 
-	action *A;
+	actions::action *A;
 
-	A = NEW_OBJECT(action);
+	A = NEW_OBJECT(actions::action);
 
-	A->init_symmetric_group(degree, verbose_level);
+	A->Known_groups->init_symmetric_group(degree, false /* f_no_base */, verbose_level);
 
 	A->Strong_gens->print_generators_in_latex_individually(cout);
 	A->Strong_gens->print_generators_in_source_code();
@@ -32,10 +32,10 @@ int main()
 	A->print_info();
 
 
-	vector_ge *vec;
+	data_structures_groups::vector_ge *vec;
 	int i;
-	int *Elt;
 	int *data;
+	int *Elt;
 
 	data = NEW_int(A->make_element_size);
 	A->all_elements(vec, verbose_level);
@@ -45,12 +45,22 @@ int main()
 		Elt = vec->ith(i);
 
 		cout << i << " : ";
-		A->element_print(Elt, cout);
+		A->Group_element->element_print(Elt, cout);
 		cout << " : ";
 
-		A->element_code_for_make_element(Elt, data);
+		A->Group_element->element_code_for_make_element(Elt, data);
 		//A->element_print(Elt, cout);
-		Orbiter->Int_vec.print(cout, data, A->make_element_size);
+		Int_vec_print(cout, data, A->make_element_size);
 		cout << endl;
 	}
+
+	string fname_csv;
+
+	fname_csv = A->label + ".csv";
+
+	A->all_elements_save_csv(fname_csv, verbose_level);
+
+
+	FREE_OBJECT(vec);
+	FREE_int(data);
 }
